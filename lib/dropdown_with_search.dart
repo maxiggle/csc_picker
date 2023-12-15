@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class DropdownWithSearch<T> extends StatelessWidget {
   final String title;
@@ -99,7 +98,6 @@ class DropdownWithSearch<T> extends StatelessWidget {
                           ? selectedItemStyle
                           : TextStyle(
                               fontSize: 16,
-                              fontFamily: GoogleFonts.poppins().fontFamily,
                               fontWeight: FontWeight.w400,
                               color: Color(0xff8488AA)))),
               SvgPicture.asset(

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class DropdownWithSearch<T> extends StatelessWidget {
   final String title;
@@ -14,12 +16,16 @@ class DropdownWithSearch<T> extends StatelessWidget {
   final double? dialogRadius;
   final bool disabled;
   final String label;
+  final FontWeight? fontWeight;
+  final double? fontSize;
+  final String? labelFontFamily;
 
   final Function onChanged;
 
   const DropdownWithSearch(
       {Key? key,
       required this.title,
+      required this.labelFontFamily,
       required this.placeHolder,
       required this.items,
       required this.selected,
@@ -33,7 +39,9 @@ class DropdownWithSearch<T> extends StatelessWidget {
       this.searchBarRadius,
       this.dialogRadius,
       required this.label,
-      this.disabled = false})
+      this.disabled = false,
+      this.fontWeight,
+      this.fontSize})
       : super(key: key);
 
   @override
@@ -45,6 +53,8 @@ class DropdownWithSearch<T> extends StatelessWidget {
           showDialog(
               context: context,
               builder: (context) => SearchDialog(
+                  fontWeight: fontWeight ?? FontWeight.w500,
+                  fontSize: fontSize,
                   placeHolder: placeHolder,
                   title: title,
                   searchInputRadius: searchBarRadius,
@@ -65,13 +75,13 @@ class DropdownWithSearch<T> extends StatelessWidget {
           });
         },
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+          padding: EdgeInsets.only(top: 20, bottom: 20, right: 18, left: 17),
           decoration: !disabled
               ? decoration != null
                   ? decoration
                   : BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(5)),
-                      color: Colors.white,
+                      color: Color(0xffF6F6F6),
                       border: Border.all(color: Colors.grey.shade300, width: 1))
               : disabledDecoration != null
                   ? disabledDecoration
@@ -87,8 +97,13 @@ class DropdownWithSearch<T> extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: selectedItemStyle != null
                           ? selectedItemStyle
-                          : TextStyle(fontSize: 14))),
-              Icon(Icons.keyboard_arrow_down_rounded)
+                          : TextStyle(
+                              fontSize: 16,
+                              fontFamily: GoogleFonts.poppins().fontFamily,
+                              fontWeight: FontWeight.w400,
+                              color: Color(0xff8488AA)))),
+              SvgPicture.asset(
+                  'packages/csc_picker/lib/assets/sorom_drop_down.svg')
             ],
           ),
         ),
@@ -104,6 +119,8 @@ class SearchDialog extends StatefulWidget {
   final TextStyle? titleStyle;
   final TextStyle? itemStyle;
   final double? searchInputRadius;
+  final double? fontSize;
+  final FontWeight fontWeight;
 
   final double? dialogRadius;
 
@@ -115,7 +132,9 @@ class SearchDialog extends StatefulWidget {
       this.titleStyle,
       this.searchInputRadius,
       this.dialogRadius,
-      this.itemStyle})
+      this.itemStyle,
+      this.fontSize,
+      required this.fontWeight})
       : super(key: key);
 
   @override
@@ -173,7 +192,9 @@ class _SearchDialogState<T> extends State<SearchDialog> {
                     widget.title,
                     style: widget.titleStyle != null
                         ? widget.titleStyle
-                        : TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                        : TextStyle(
+                            fontSize: widget.fontSize,
+                            fontWeight: widget.fontWeight),
                   ),
                 ),
                 IconButton(

@@ -549,15 +549,19 @@ class CSCPicker extends StatefulWidget {
     this.title,
     this.clearButtonContent = const Text("Clear"),
     this.showClearButton = false,
+     this.titleFontWeight,
+     this.titleFontSize, this.labelFontFamily,
   }) : super(key: key);
 
   final ValueChanged<String?>? onCountryChanged;
   final ValueChanged<String?>? onStateChanged;
   final ValueChanged<String?>? onCityChanged;
+  final String? labelFontFamily;
 
   final String? currentCountry;
   final String? currentState;
   final String? currentCity;
+  final FontWeight? titleFontWeight;
 
   final bool disableCountry;
 
@@ -586,6 +590,7 @@ class CSCPicker extends StatefulWidget {
   final String countryDropdownLabel;
   final String stateDropdownLabel;
   final String cityDropdownLabel;
+  final double? titleFontSize;
 
   final List<CscCountry>? countryFilter;
 
@@ -901,6 +906,7 @@ class CSCPickerState extends State<CSCPicker> {
   ///Country Dropdown Widget
   Widget countryDropdown() {
     return DropdownWithSearch(
+      labelFontFamily: widget.labelFontFamily,
       title: widget.countryDropdownLabel,
       placeHolder: widget.countrySearchPlaceholder,
       selectedItemStyle: widget.selectedItemStyle,
@@ -912,6 +918,7 @@ class CSCPickerState extends State<CSCPicker> {
       dialogRadius: widget.dropdownDialogRadius,
       searchBarRadius: widget.searchBarRadius,
       label: widget.countrySearchPlaceholder,
+      fontWeight: widget.titleFontWeight, fontSize: widget.titleFontSize,
       items: _country.map((String? dropDownStringItem) {
         return dropDownStringItem;
       }).toList(),
@@ -932,6 +939,7 @@ class CSCPickerState extends State<CSCPicker> {
   ///State Dropdown Widget
   Widget stateDropdown() {
     return DropdownWithSearch(
+      labelFontFamily: widget.labelFontFamily,
       title: widget.stateDropdownLabel,
       placeHolder: widget.stateSearchPlaceholder,
       disabled: _states.length == 0 ? true : false,
@@ -960,6 +968,7 @@ class CSCPickerState extends State<CSCPicker> {
   ///City Dropdown Widget
   Widget cityDropdown() {
     return DropdownWithSearch(
+      labelFontFamily: widget.labelFontFamily,
       title: widget.cityDropdownLabel,
       placeHolder: widget.citySearchPlaceholder,
       disabled: _cities.length == 0 ? true : false,

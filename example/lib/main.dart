@@ -1,5 +1,6 @@
 import 'package:csc_picker/csc_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 /// This is a implementation of the Country State City Picker.
 void main() {
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -41,6 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
     GlobalKey<CSCPickerState> _cscPickerKey = GlobalKey();
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(widget.title),
       ),
@@ -51,9 +53,12 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               children: [
                 ///Adding CSC Picker Widget in app
+
                 CSCPicker(
                   ///Enable disable state dropdown [OPTIONAL PARAMETER]
                   showStates: true,
+                  layout: Layout.vertical,
+                  labelFontFamily: GoogleFonts.poppins().fontFamily,
 
                   /// Enable disable city drop down [OPTIONAL PARAMETER]
                   showCities: true,
@@ -63,17 +68,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
                   ///Dropdown box decoration to style your dropdown selector [OPTIONAL PARAMETER] (USE with disabledDropdownDecoration)
                   dropdownDecoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      color: Colors.white,
-                      border:
-                          Border.all(color: Colors.grey.shade300, width: 1)),
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    color: Color(0xFFF6F6F6),
+                  ),
 
                   ///Disabled Dropdown box decoration to style your dropdown selector [OPTIONAL PARAMETER]  (USE with disabled dropdownDecoration)
                   disabledDropdownDecoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      color: Colors.grey.shade300,
-                      border:
-                          Border.all(color: Colors.grey.shade300, width: 1)),
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    color: Colors.grey.shade300,
+                  ),
 
                   ///placeholders for dropdown search field
                   countrySearchPlaceholder: "Country",
@@ -89,14 +92,18 @@ class _MyHomePageState extends State<MyHomePage> {
                   ///defaultCountry: CscCountry.India,
 
                   ///Country Filter [OPTIONAL PARAMETER]
-                  countryFilter: [CscCountry.India,CscCountry.United_States,CscCountry.Canada],
+                  countryFilter: [
+                    CscCountry.India,
+                    CscCountry.United_States,
+                    CscCountry.Canada
+                  ],
 
                   ///Disable country dropdown (Note: use it with default country)
                   //disableCountry: true,
 
                   ///selected item style [OPTIONAL PARAMETER]
                   selectedItemStyle: TextStyle(
-                    color: Colors.black,
+                    color: Color(0xff8488AA),
                     fontSize: 14,
                   ),
 
@@ -122,7 +129,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   onCountryChanged: (value) {
                     setState(() {
                       ///store value in country variable
-                      countryValue = value;
+                      countryValue = value ?? '';
                     });
                   },
 
@@ -130,7 +137,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   onStateChanged: (value) {
                     setState(() {
                       ///store value in state variable
-                      stateValue = value;
+                      stateValue = value ?? '';
                     });
                   },
 
@@ -138,23 +145,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   onCityChanged: (value) {
                     setState(() {
                       ///store value in city variable
-                      cityValue = value;
+                      cityValue = value ?? '';
                     });
                   },
-
-                  ///Show only specific countries using country filter
-                  // countryFilter: ["United States", "Canada", "Mexico"],
+                  titleFontWeight: FontWeight.w500,
+                  titleFontSize: 16,
                 ),
-
-                ///print newly selected country state and city in Text Widget
-                TextButton(
-                    onPressed: () {
-                      setState(() {
-                        address = "$cityValue, $stateValue, $countryValue";
-                      });
-                    },
-                    child: Text("Print Data")),
-                Text(address)
               ],
             )),
       ),

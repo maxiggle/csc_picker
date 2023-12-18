@@ -39,8 +39,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    GlobalKey<CSCPickerState> _cscPickerKey = GlobalKey();
-
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -61,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   labelFontFamily: GoogleFonts.poppins().fontFamily,
 
                   /// Enable disable city drop down [OPTIONAL PARAMETER]
-                  showCities: true,
+                  showCities: false,
 
                   ///Enable (get flag with country name) / Disable (Disable flag) / ShowInDropdownOnly (display flag in dropdown only) [OPTIONAL PARAMETER]
                   flagState: CountryFlag.DISABLE,

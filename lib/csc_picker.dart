@@ -549,8 +549,9 @@ class CSCPicker extends StatefulWidget {
     this.title,
     this.clearButtonContent = const Text("Clear"),
     this.showClearButton = false,
-     this.titleFontWeight,
-     this.titleFontSize, this.labelFontFamily,
+    this.titleFontWeight,
+    this.titleFontSize,
+    this.labelFontFamily,
   }) : super(key: key);
 
   final ValueChanged<String?>? onCountryChanged;
@@ -838,7 +839,9 @@ class CSCPickerState extends State<CSCPicker> {
                   SizedBox(
                     height: 10.0,
                   ),
-                  cityDropdown()
+                  widget.showStates && widget.showCities
+                      ? cityDropdown()
+                      : Container()
                 ],
               )
             : Column(
